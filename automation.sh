@@ -37,7 +37,6 @@ for file in $(ls /var/log/apache2/*.$(date '+%d%m%Y-%H%M%S').access.log); do
     gzip $file
     mv $file.gz /temp/Sharad-httpd-logs-$(date '+%d%m%Y-%H%M%S').gz
 # to inter the record in inventory.html
-ls /tem/Sharad-httpd-logs* >  /var/www/html/inventory.html
 
 
 # BookKeeping
@@ -45,7 +44,7 @@ logType=httpd-logs
 TimeCreted=$(date '+%d%m%Y-%H%M%S')
 type=gz
 size=$(ls -lh /temp/Sharad-httpd-logs-$(date '+%d%m%Y-%H%M%S').gz | awk '{ print $5 }')
-echo $logtype $TimeCreated $type $size >  /var/www/html/inventory.html
+echo $logtype $TimeCreated $type $size >>  /var/www/html/inventory.html
 
 
 
@@ -63,11 +62,13 @@ for file in $(ls /var/log/apache2/*.$(date '+%d%m%Y-%H%M%S').error.log); do
 
 # to inter the record in inventory.html
 # BookKeeping
+#we are asuming that inventory.html file is already created  in the required format
+#And also these variable are defiened  there
 logType=errorLog
 TimeCreted=$(date '+%d%m%Y-%H%M%S')
 type=gz
 size=$(ls -lh /temp/Sharad-error-logs-$(date '+%d%m%Y-%H%M%S').gz | awk '{ print $5 }')
-echo $logtype $TimeCreated $type $size >  /var/www/html/inventory.html
+echo $logtype $TimeCreated $type $size >>  /var/www/html/inventory.html
 
 
     aws s3 \

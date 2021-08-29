@@ -55,3 +55,7 @@ Start of task 3
 3, I have given all the permission to the file automation i.e. all root privelleges
     with command
                sudo chmod -R 777 automation
+
+
+for Bookkeping
+1. I have taken a variavle for each value and stored the required data in them and then appending them in the html file.
