@@ -25,6 +25,18 @@ sudo apt update
 sudo apt install awscli
 and then configured there with the iam role keys
 
+#Make the script executible
+chmod  +x  /root/Automation_Project/automation.sh
+#switch to root user with sudo su
+sudo  su
+./root/Automation_Project/automation.sh
+
+# or run with sudo privileges
+sudo ./root/Automation_Project/automation.sh
+
+
+
+
 Now we have to shedule the script in crontab so for that run the following cammand
 
 sudo crontab -e
