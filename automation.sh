@@ -36,6 +36,20 @@ sudo systemctl enable apache2
 for file in $(ls /var/log/apache2/*.$(date '+%d%m%Y-%H%M%S').access.log); do
     gzip $file
     mv $file.gz /temp/Sharad-httpd-logs-$(date '+%d%m%Y-%H%M%S').gz
+# to inter the record in inventory.html
+ls /tem/Sharad-httpd-logs* >  /var/www/html/inventory.html
+
+
+# BookKeeping
+logType=httpd-logs
+TimeCreted=$(date '+%d%m%Y-%H%M%S')
+type=gz
+size=$(ls -lh /temp/Sharad-httpd-logs-$(date '+%d%m%Y-%H%M%S').gz | awk '{ print $5 }')
+echo $logtype $TimeCreated $type $size >  /var/www/html/inventory.html
+
+
+
+
     aws s3 \
 cp /tmp/Sharad-httpd-logs-$(date '+%d%m%Y-%H%M%S').gz \
 s3://${s3_bucket}/Sharad-httpd-logs-$(date '+%d%m%Y-%H%M%S').gz
@@ -46,6 +60,16 @@ done;
 for file in $(ls /var/log/apache2/*.$(date '+%d%m%Y-%H%M%S').error.log); do
     gzip $file
     mv $file.gz /temp/Sharad-error-logs-$(date '+%d%m%Y-%H%M%S').gz
+
+# to inter the record in inventory.html
+# BookKeeping
+logType=errorLog
+TimeCreted=$(date '+%d%m%Y-%H%M%S')
+type=gz
+size=$(ls -lh /temp/Sharad-error-logs-$(date '+%d%m%Y-%H%M%S').gz | awk '{ print $5 }')
+echo $logtype $TimeCreated $type $size >  /var/www/html/inventory.html
+
+
     aws s3 \
 cp /tmp/Sharad-error-logs-$(date '+%d%m%Y-%H%M%S').gz \
 s3://${s3_bucket}/Sharad-error-logs-$(date '+%d%m%Y-%H%M%S').gz
