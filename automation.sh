@@ -32,7 +32,7 @@ fi
 sudo systemctl enable apache2
 
 #Archiving Logs
-
+#for access log
 for file in $(ls /var/log/apache2/*.$(date '+%d%m%Y-%H%M%S').access.log); do
     gzip $file
     mv $file.gz /temp/Sharad-httpd-logs-$(date '+%d%m%Y-%H%M%S').gz
@@ -42,6 +42,7 @@ s3://${s3_bucket}/Sharad-httpd-logs-$(date '+%d%m%Y-%H%M%S').gz
 #now copied to S3 since your aws cli is already configured on ec2 instance
 done;
 
+#for error log files
 for file in $(ls /var/log/apache2/*.$(date '+%d%m%Y-%H%M%S').error.log); do
     gzip $file
     mv $file.gz /temp/Sharad-error-logs-$(date '+%d%m%Y-%H%M%S').gz
