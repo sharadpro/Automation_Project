@@ -3,4 +3,5 @@
     {"id": 2, "name": "Alice", "role": "Backend Developer"},
     {"id": 3, "name": "Bob", "role": "Frontend Developer"},
     {"id": 4, "name": "Wolf", "role": "Solution Engineer"}
+    {"id": 5, "name": "Richi", "role": "Solution Engineer"}
 ]
